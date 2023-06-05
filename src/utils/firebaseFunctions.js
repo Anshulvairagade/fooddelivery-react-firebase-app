@@ -33,6 +33,8 @@ export const getAllFoodItems = async () => {
   const items = await getDocs(
     query(collection(firestore, "foodItems"), orderBy("id", "desc"))
   );
-
+  
+  // const newItems = items.docs.map((doc) => doc.data());
+  // return newItems  // this will be an array of objects2
   return items.docs.map((doc) => doc.data());
 };

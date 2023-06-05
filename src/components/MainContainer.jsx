@@ -41,6 +41,7 @@ const MainContainer = () => {
             </motion.div>
           </div>
         </div>
+        {/* if scrollValue will change only this component will render and not whole page */}
         <RowContainer
           scrollValue={scrollValue}
           flag={true}
@@ -49,7 +50,7 @@ const MainContainer = () => {
       </section>
 
       <MenuContainer />
-
+      {/* we are making this true or false using cartShow state if its true we will see cartContainer */}
       {cartShow && <CartContainer />}
     </div>
   );

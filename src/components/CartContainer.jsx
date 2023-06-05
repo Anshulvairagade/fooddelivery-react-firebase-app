@@ -13,20 +13,27 @@ const CartContainer = () => {
   const [flag, setFlag] = useState(1);
   const [tot, setTot] = useState(0);
 
+  // check mainContainer component to see how showCart works
   const showCart = () => {
     dispatch({
       type: actionType.SET_CART_SHOW,
       cartShow: !cartShow,
     });
   };
-
   useEffect(() => {
     let totalPrice = cartItems.reduce(function (accumulator, item) {
-      return accumulator + item.qty * item.price;
+      return accumulator + (item.qty) * item.price;
     }, 0);
     setTot(totalPrice);
-    console.log(tot);
-  }, [tot, flag]);
+    console.log(tot)
+}, [cartItems,tot, flag])
+  // useEffect(() => {
+  //   let totalPrice = cartItems.reduce(function (accumulator, item) {
+  //     return accumulator + (item.qty) * item.price;
+  //   }, 0);
+  //   setTot(totalPrice);
+  //   // console.log(tot);
+  // }, [tot, flag]);
 
   const clearCart = () => {
     dispatch({

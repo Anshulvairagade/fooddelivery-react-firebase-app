@@ -32,7 +32,7 @@ const CreateContainer = () => {
   const [msg, setMsg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [{ foodItems }, dispatch] = useStateValue();
-
+  // console.log(foodItems) //it will be array of objects
   const uploadImage = (e) => {
     setIsLoading(true);
     const imageFile = e.target.files[0];
@@ -56,6 +56,7 @@ const CreateContainer = () => {
         }, 4000);
       },
       () => {
+        // read readme file for uploadTask.snapshot.ref
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setImageAsset(downloadURL);
           setIsLoading(false);
@@ -140,13 +141,15 @@ const CreateContainer = () => {
 
   const fetchData = async () => {
     await getAllFoodItems().then((data) => {
+      // data will be array of objects
       dispatch({
         type: actionType.SET_FOOD_ITEMS,
         foodItems: data,
       });
+      
     });
   };
-
+  
   return (
     <div className="w-full min-h-screen flex items-center justify-center">
       <div className="w-[90%] md:w-[50%] border border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center gap-4">
@@ -179,7 +182,8 @@ const CreateContainer = () => {
 
         <div className="w-full">
           <select
-            onChange={(e) => setCategory(e.target.value)}
+            // e.target.value will be the value from option tag 
+            onChange={(e) =>  setCategory(e.target.value)}
             className="outline-none w-full text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer"
           >
             <option value="other" className="bg-white">
@@ -191,7 +195,9 @@ const CreateContainer = () => {
                   key={item.id}
                   className="text-base border-0 outline-none capitalize bg-white text-headingColor"
                   value={item.urlParamName}
+                 
                 >
+                
                   {item.name}
                 </option>
               ))}
@@ -199,6 +205,7 @@ const CreateContainer = () => {
         </div>
 
         <div className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-225 md:h-340 cursor-pointer rounded-lg">
+         {/* if loading is true show loader, or if loading is false, and if image is there show image or show upload an image */}
           {isLoading ? (
             <Loader />
           ) : (

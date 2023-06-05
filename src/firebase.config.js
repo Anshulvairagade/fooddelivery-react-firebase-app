@@ -13,7 +13,9 @@ const firebaseConfig = {
 };
 
 const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig)
+// for storing data
 const firestore = getFirestore(app)
+// for storing images
 const storage = getStorage(app)
 
 export { app, firestore, storage }

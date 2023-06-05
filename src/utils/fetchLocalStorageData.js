@@ -13,7 +13,6 @@ export const fetchCart = () => {
     localStorage.getItem("cartItems") !== "undefined"
       ? JSON.parse(localStorage.getItem("cartItems"))
       : localStorage.clear();
-  // console.log(cartInfo, ": cartInfo")
   return cartInfo ? cartInfo : [];
   
 
@@ -28,3 +27,4 @@ export const fetchCart = () => {
 //   const cartInfo = localStorage.getItem("cartItems");
 //   return cartInfo !== null ? JSON.parse(cartInfo) : [];
 // };
+

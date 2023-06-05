@@ -9,7 +9,8 @@ import { actionType } from "../context/reducer";
 const RowContainer = ({ flag, data, scrollValue }) => {
   const rowContainer = useRef();
   const [{ cartItems }, dispatch] = useStateValue();
-
+  // console.log(cartItems) empty array at first
+  // console.log(cartItems)
   const [items, setItems] = useState(cartItems);
   const addtocart = () => {
     dispatch({
@@ -17,7 +18,7 @@ const RowContainer = ({ flag, data, scrollValue }) => {
       cartItems: items,
     });
     localStorage.setItem("cartItems", JSON.stringify(items));
-    console.log(items)
+    // console.log(items)
 
   };
 
@@ -58,6 +59,7 @@ const RowContainer = ({ flag, data, scrollValue }) => {
               <motion.div
                 whileTap={{ scale: 0.75 }}
                 className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center cursor-pointer hover:shadow-md -mt-8"
+                // we are getting all items from cartItems state, then putting it in items state along with current item, then agains sending this items (previous cartItems + current item) into cartItems 
                 onClick={() => setItems([...cartItems, item])}
               >
                 <MdShoppingBasket className="text-white" />
@@ -79,6 +81,7 @@ const RowContainer = ({ flag, data, scrollValue }) => {
             </div>
           </div>
         ))
+      
       ) : (
         <div className="w-full flex flex-col items-center justify-center">
           <img src={NotFound} className="h-340" />

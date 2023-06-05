@@ -4,8 +4,10 @@ import { motion } from "framer-motion";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { fetchCart } from "../utils/fetchLocalStorageData";
-let items = [];
 
+
+
+let items = [];
 const CartItem = ({ item, setFlag, flag }) => {
   const [{ cartItems }, dispatch] = useStateValue();
   const [qty, setQty] = useState(item.qty);
@@ -20,36 +22,36 @@ const CartItem = ({ item, setFlag, flag }) => {
 
   const updateQty = (action, id) => {
     if (action == "add") {
-      setQty(qty + 1);
+      setQty(qty + 1); // for using qty in subtotal n all
       cartItems.map((item) => {
         if (item.id === id) {
-          item.qty += 1;
+          item.qty += 1; // for increasing qty in cartItems in localstorage
           setFlag(flag + 1);
         }
       });
       cartDispatch();
     } else {
-      // initial state value is one so you need to check if 1 then remove it
       if (qty == 1) {
         items = cartItems.filter((item) => item.id !== id);
         setFlag(flag + 1);
         cartDispatch();
       } else {
-        setQty(qty - 1);
+        setQty(qty - 1); // for using qty in subtotal nall 
         cartItems.map((item) => {
           if (item.id === id) {
-            item.qty -= 1;
+            item.qty -= 1; // for decreasing qty in cartItems from localstorage
             setFlag(flag + 1);
           }
         });
         cartDispatch();
       }
     }
+    
   };
 
   useEffect(() => {
     items = cartItems;
-  }, [qty, items]);
+  }, [qty, items]); // can pass cartItems too but don't
 
   return (
     <div className="w-full p-1 px-2 rounded-lg bg-cartItem flex items-center gap-2">
